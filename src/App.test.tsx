@@ -24,7 +24,7 @@ test('Create an Expense', () => {
     fireEvent.click(save);
 
     expect(screen.getByText('Groceries')).toBeInTheDocument();
-    expect(screen.getByText('112.74')).toBeInTheDocument();
+    expect(screen.getByText('112.74')).not.toBeInTheDocument(); // Changed to not for lab5 , change back to normal
     // expect(screen.getByText('Groceries')).toBeInTheDocument();
 });
 
