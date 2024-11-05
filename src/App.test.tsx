@@ -24,7 +24,7 @@ test('Create an Expense', () => {
     fireEvent.click(save);
 
     expect(screen.getByText('Groceries')).toBeInTheDocument();
-    expect(screen.getByText('112.74')).toBeInTheDocument();
+    expect(screen.getByText('112.74')).toBeInTheDocument(); 
     // expect(screen.getByText('Groceries')).toBeInTheDocument();
 });
 
