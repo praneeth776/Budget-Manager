@@ -13,7 +13,7 @@ const AddExpenseForm = () => {
     event.preventDefault();
     // Exercise: Add add new expense to expenses context array
     const newExpense: Expense = {
-        id: String(expenses.length +1),
+        id: Date.now().toString(36) + Math.floor(Math.pow(10, 12) + Math.random() * 9*Math.pow(10, 12)).toString(36), // Randomizing ids to prevent same ids
         description: name,
         cost: Number(cost)
     }
