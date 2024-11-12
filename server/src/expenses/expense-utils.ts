@@ -25,15 +25,6 @@ export async function createExpenseServer(req: Request, res: Response, db: Datab
 
 export async function deleteExpense(req: Request, res: Response, db : Database) {
     // TO DO: Implement deleteExpense function
-    // extract id
-    // const id: string = req.params.id;
-    // if ( !id ) {
-    //     return res.status(400).send({ error: "Missing required fields" });
-    // }
-    // const index = expenses.findIndex(expense => expense.id === id);
-    // console.log(`Delete called on ${id}`);
-    // expenses.splice(index, 1);
-    // res.status(201);
     const id = req.params.id;
     if(!id){
         return res.status(400).send({error: `Missing required fields`});
@@ -51,20 +42,16 @@ export async function deleteExpense(req: Request, res: Response, db : Database) 
  * @param res - Send all the data in the table expenses
  * @param db - The database with table expenses
  */
-export async function getExpenses(req: Request, res: Response, db : Database) {
-    //res.status(200).send({ "data": expenses });
-    try{
-        const data = await new Promise ( (resolve,rejects)=>{
-            db.all('SELECT * FROM expenses;',(err: Error,rows: Expense[])=>{
-                if(err){
-                    rejects(rows);
-                }
-                resolve(rows);
-            });
+export async function getExpenses(req: Request, res: Response, db: Database) {
+    try {
+        console.log(`Function called: getExpenses ${req}`);
+        const data: Expense[] = await db.all("SELECT * FROM expenses;", (err: Error | null, rows: Expense[]) => {
+            if(err) throw err;
+            console.log(rows);
         });
-        res.status(201).send(data);
-    } catch{
-        return res.status(400).send({ error: `Expenses could not be fetched` });
+  
+      res.status(200).send(data);
+    } catch (error) {
+      res.status(400).send({ error: `Expenses could not be fetched` });
     }
-
-}
+  }
